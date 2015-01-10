@@ -2,7 +2,7 @@ Msisdn is .NET library that facilitates working with international telephone num
 
 Features:
 
-* Provides a type for representing phone numbers
+* Provides a type for representing phone numbers. A value of this type will ALWAYS be a valid phone number (it may not exist, but it will be valid).
 * Validates MSISDN strings
 * Normalizes MSISDN strings to its canonical representation
 * Lets you extract country calling code and country name from Msisdn
@@ -35,6 +35,8 @@ A single case discriminated union wrapping a phone number string. YOU DON'T NEED
     val create : string -> T option
 
 Creates an Msisdn option. If s is a valid number, returns `Some Msisdn.T`. If not valid, returns `None`. `null` is never a valid number.
+
+By using an option type, `create` forces the caller to handle the case of invalid input, which is a good thing!
 
 `create` will strip away and ignore certain characters normally found in human representations of phone numbers. These are all valid inputs:
 
@@ -103,7 +105,6 @@ from an Msisdn.
 
 This is how you may use FSharp.Msisdn to get the canonical representation from a list potensially containing some invalid numbers:
 
-
     let numbers = ["47 91 92 93 94"
                    "1-555-32-654"
                    "00362347657"
@@ -116,6 +117,27 @@ This is how you may use FSharp.Msisdn to get the canonical representation from a
 
     // Result:
     // ["4791929394"; "155532654"; "362347657"]
+
+Of course the same thing can be done even more easily using `canonicalize` and `isValid` directly:
+
+    numbers
+    |> List.map Msisdn.canonicalize
+    |> List.filter Msisdn.isValid
+
+If you need to group your numbers by country code, you could do something like this:
+
+    numbers
+    |> List.map Msisdn.create
+    |> List.filter Option.isSome
+    |> List.map Option.get
+    |> Seq.groupBy 
+        (fun x -> let cc, _ = Msisdn.countryCode x in cc)
+    
+    // Result:
+    // [("47", seq [Msisdn "4791929394"])
+    //  ("1", seq [Msisdn "155532654"])
+    //  ("36", seq [Msisdn "362347657"])]
+
 
 ## The MIT License (MIT)
 
