@@ -36,37 +36,79 @@ You can get the country calling code prefix and name from an Msisdn:
 
 ## Msisdn module API
 
-	(* A single case union type wrapping a phone
-	   number string. YOU DON'T NEED TO REFER TO
-	   THIS TYPE DIRECTLY, AND SHOULD NOT DO SO. *)
+### T
+
 	type T = Msisdn of string
 
-    (* Creates an Msisdn option
-       If s is a valid number, returns Some Msisdn.T
-       If not valid, returns None *)
+A single case discriminated union wrapping a phone number string. YOU DON'T NEED TO REFER TO THIS TYPE DIRECTLY, AND SHOULD NOT DO SO.
+
+### create
+
     val create : string -> T option
 
-    (* Apply function f to the canonical string  
-	   representation of an Msisdn. *)
+Creates an Msisdn option. If s is a valid number, returns `Some Msisdn.T`. If not valid, returns `None`. `null` is never a valid number.
+
+### apply
+
     val apply : (string -> 'a) -> T -> 'a
 
-    (* Get the canonical string representation of an Msisdn. *)
+Apply function f to the canonical string representation of an Msisdn.
+
+### value
+
     val value : T -> string
+
+Get the canonical string representation of an Msisdn.
+
+### equals
 
     val equals : T -> T -> bool
 
+### compareTo
+
     val compareTo : T -> T -> int
 
-    (* Checks if s is a valid input for an Msisdn.
-       Verification is done for you when you create
-       a new Msisdn using the create function. *)
+### isValid
+
     val isValid : string -> bool
 
-    (* Transforms a valid Msisdn string to its canonical form.
-       This is done for you when you create a new Msisdn using
-       the create function. *)
+Checks if s is a valid input for an Msisdn.
+Verification is done for you when you create
+a new Msisdn using the create function.
+
+### canonicalize
+
     val canonicalize : string -> string
 
-    (* Get the country calling code prefix and the country name
-       from an Msisdn. *)
+Transforms a valid Msisdn string to its canonical form.
+This is done for you when you create a new Msisdn using
+the create function.
+
+### countryCode
+
     val countryCode : T -> string * string
+
+Get the country calling code prefix and the country name
+from an Msisdn.
+
+## The MIT License (MIT)
+
+Copyright (c) 2015 Torbjørn Marø
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
