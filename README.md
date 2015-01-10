@@ -20,7 +20,7 @@ You create an Msisdn by providing a string describing the phone number, includin
     | Some msisdn -> doSomethingWith msisdn
     | None -> printfn "Not a valid MSISDN"
 
-Note that you don't have to (and should not) open the Msisdn module. The module will automatically be available everywhere in a project referencing FSharp.Msisdn.
+Note that you don't have to (actually you're not allowed to) open the Msisdn module. The module will automatically be available everywhere in a project referencing FSharp.Msisdn, but you have to use qualified access.
 
 ## Msisdn module API
 

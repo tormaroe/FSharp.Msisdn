@@ -1,4 +1,5 @@
-﻿module Msisdn
+﻿[<RequireQualifiedAccess>]
+module Msisdn
 
 open System.Text.RegularExpressions
 
