@@ -99,6 +99,24 @@ from an Msisdn.
     // val prefix = "47"
     // val country = "Norway"
 
+## More examples
+
+This is how you may use FSharp.Msisdn to get the canonical representation from a list potensially containing some invalid numbers:
+
+
+    let numbers = ["47 91 92 93 94"
+                   "1-555-32-654"
+                   "00362347657"
+                   "+87899877889x"]
+    
+    numbers
+    |> List.map Msisdn.create
+    |> List.filter Option.isSome
+    |> List.map (Option.get >> Msisdn.value)
+
+    // Result:
+    // ["4791929394"; "155532654"; "362347657"]
+
 ## The MIT License (MIT)
 
 Copyright (c) 2015 Torbjørn Marø
