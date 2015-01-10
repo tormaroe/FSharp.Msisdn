@@ -25,7 +25,7 @@ let private validationRegex = Regex ("", RegexOptions.Compiled)
 
 /// Checks if s is a valid input for an Msisdn
 let isValid s =
-    System.Text.RegularExpressions.Regex.IsMatch (s, "^[0-9]{1,15}$")
+    System.Text.RegularExpressions.Regex.IsMatch (s, "^[0-9]{8,15}$")
 
 let private remove (s:string) x =
     s.Replace (string x, "")
@@ -54,8 +54,7 @@ let create s =
 
 let private unassigned = "unassigned"
 
-// TODO: set min length based on max country code ?!
-
+/// Get country code and name from an Msisdn
 let countryCode x =
     let s = value x
     match s.[0] with
