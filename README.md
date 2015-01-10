@@ -7,6 +7,10 @@ Features:
 * Normalizes MSISDN strings to its canonical representation
 * Lets you extract country calling code and country name from Msisdn
 
+## Install with NuGet
+
+    PM> Install-Package FSharp.Msisdn
+
 ## Usage
 
 You create an Msisdn by providing a string describing the phone number, including country calling code prefix, to the `create` function.
@@ -15,6 +19,8 @@ You create an Msisdn by providing a string describing the phone number, includin
     match Msisdn.create "4799999999" with
     | Some msisdn -> doSomethingWith msisdn
     | None -> printfn "Not a valid MSISDN"
+
+Note that you don't have to (and should not) open the Msisdn module. The module will automatically be available everywhere in a project referencing FSharp.Msisdn.
 
 ## Msisdn module API
 
