@@ -1,8 +1,15 @@
 Msisdn is .NET library that facilitates working with international telephone numbers in F#. It follows the [ITU-T](http://en.wikipedia.org/wiki/ITU-T) recommendation [E.164](http://en.wikipedia.org/wiki/E.164).
 
+Features:
+
+* Provides a type for representing phone numbers
+* Validates MSISDN strings
+* Normalizes MSISDN strings to its canonical representation
+* Lets you extract country calling code and country name from Msisdn
+
 ## Usage
 
-You create an Msisdn type by providing a string describing the phone number, including country calling code prefix, to the `create` function.
+You create an Msisdn by providing a string describing the phone number, including country calling code prefix, to the `create` function.
 
 	// Create a fictitious Norwegian mobile number
     match Msisdn.create "4799999999" with
@@ -53,7 +60,7 @@ When you retrieve the value from an Msisdn, the canonical string representation 
 
     val isValid : string -> bool
 
-Checks if s is a valid input for an Msisdn.
+Checks if string is a valid input for an Msisdn.
 Verification is done for you when you create
 a new Msisdn using the `create` function.
 
