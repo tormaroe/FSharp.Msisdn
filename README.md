@@ -112,8 +112,7 @@ This is how you may use FSharp.Msisdn to get the canonical representation from a
     
     numbers
     |> List.map Msisdn.create
-    |> List.filter Option.isSome
-    |> List.map (Option.get >> Msisdn.value)
+    |> List.choose (Option.map Msisdn.value)
 
     // Result:
     // ["4791929394"; "155532654"; "362347657"]
