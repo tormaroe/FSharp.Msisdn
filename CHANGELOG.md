@@ -2,7 +2,14 @@
 
 ## vNext
 
-* Use a precompiled regex for Msisdn validation
+* Allow period (`.`) in Msisdn input.
+* Add more specific Country Code descriptions in Zone 1 (North America).
+
+## 0.3.0
+
+* Use a precompiled regex for Msisdn validation.
+* Restrict Country Code to three digits.
+* Accept 90533 and 90542 (in addition to 90392) as prefixes for Northern Cyprus, not Turkey. International country code will be 90.
 
 ## 0.2.0
 

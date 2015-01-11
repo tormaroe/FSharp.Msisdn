@@ -3,14 +3,18 @@
   <metadata>
     <id>FSharp.Msisdn</id>
     <title>FSharp.Msisdn</title>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <authors>Torbjørn Marø</authors>
     <owners>Torbjørn Marø</owners>
     <licenseUrl>https://github.com/tormaroe/FSharp.Msisdn/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/tormaroe/FSharp.Msisdn/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Msisdn is a library that facilitates working with international telephone numbers in F#.</description>
-    <releaseNotes>Require qualified access to module content (no longer possible to open Msisdn). Also validate that Msisdn is at least 8 digits.</releaseNotes>
+    <releaseNotes>
+* Use a precompiled regex for Msisdn validation.
+* Restrict Country Code to three digits.
+* Accept 90533 and 90542 (in addition to 90392) as prefixes for Northern Cyprus, not Turkey. International country code will be 90.
+    </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Msisdn F# FSharp</tags>
   </metadata>

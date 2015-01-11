@@ -92,14 +92,24 @@ the `create` function.
 
     val countryCode : T -> string * string
 
-Get the country calling code prefix and the country name
+Get the country calling code prefix (CC) and the country or destination name
 from an Msisdn.
 
-    let prefix, country = Msisdn.create "+4799999999"
+    let cc, description = Msisdn.create "+4799999999"
                           |> Option.get
                           |> Msisdn.countryCode
-    // val prefix = "47"
-    // val country = "Norway"
+    // val cc = "47"
+    // val description = "Norway"
+
+CC will always be between 1 and 3 digits. The same CC will in some situations have different descriptions.
+
+    ["90 312 213 2965"
+     "90 392 11111"]
+    |> List.map (Option.map Msisdn.countryCode)
+
+    // Result:
+    // [("90", "Turkey")
+        ("90", "Northern Cyprus")]
 
 ## More examples
 

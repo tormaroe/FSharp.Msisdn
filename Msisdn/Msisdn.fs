@@ -70,8 +70,8 @@ let countryCode x =
             | '1' -> "211", "South Sudan"
             | '2' -> 
                 match s.Substring(0, 7) with
-                | "2125288" -> "2125288", "Western Sahara"
-                | "2125289" -> "2125289", "Western Sahara"
+                | "2125288" -> "212", "Western Sahara"
+                | "2125289" -> "212", "Western Sahara"
                 | _         -> "212", "Morocco"
             | '3' -> "213", "Algeria"
             | '4' -> "214", unassigned
@@ -125,7 +125,7 @@ let countryCode x =
             | '4' -> "254", "Kenya"
             | '5' -> 
                 match s.Substring(0, 5) with
-                | "25524" -> "25524", "Zanzibar"
+                | "25524" -> "255", "Zanzibar"
                 | _       -> "255", "Tanzania"
             | '6' -> "256", "Uganda"
             | '7' -> "257", "Burundi"
@@ -137,8 +137,8 @@ let countryCode x =
             | '1' -> "261", "Madagascar"
             | '2' -> 
                 match s.Substring(0, 6) with
-                | "262269" -> "262269", "Mayotte"
-                | "262639" -> "262639", "Mayotte"
+                | "262269" -> "262", "Mayotte"
+                | "262639" -> "262", "Mayotte"
                 | _ -> "262", "Réunion"
             | '3' -> "263", "Zimbabwe"
             | '4' -> "264", "Namibia"
@@ -153,7 +153,7 @@ let countryCode x =
             match s.[2] with
             | '0' -> 
                 match s.[3] with
-                | '8' -> "2908", "Tristan da Cunha"
+                | '8' -> "290", "Tristan da Cunha"
                 | _   -> "290", "Saint Helena"
             | '1' -> "291", "Eritrea"
             | '2' -> "292", unassigned
@@ -185,7 +185,7 @@ let countryCode x =
             | '7' -> "357", "Cyprus"
             | '8' -> 
                 if s.Substring(0, 5) = "35818"
-                then "35818", "Åland Islands"
+                then "358", "Åland Islands"
                 else "358", "Finland"
             | '9' -> "359", "Bulgaria"
         | '6' -> "36", "Hungary"
@@ -196,13 +196,13 @@ let countryCode x =
             | '2' -> "372", "Estonia"
             | '3' ->
                 match s.[3] with
-                | '2' -> "3732", "Transnistria"
-                | '5' -> "3735", "Transnistria" 
+                | '2' -> "373", "Transnistria"
+                | '5' -> "373", "Transnistria" 
                 | _   -> "373", "Moldova"
             | '4' -> 
                 match s.Substring(0, 5) with
-                | "37447" -> "37447", "Nagorno-Karabakh"
-                | "37497" -> "37497", "Nagorno-Karabakh"
+                | "37447" -> "374", "Nagorno-Karabakh"
+                | "37497" -> "374", "Nagorno-Karabakh"
                 | _       -> "374", "Armenia"
             | '5' -> "375", "Belarus"
             | '6' -> "376", "Andorra"
@@ -243,9 +243,9 @@ let countryCode x =
         | '3' -> "43", "Austria"
         | '4' ->
             match s.Substring(0, 6) with
-            | "441481" -> "441481", "Guernsey"
-            | "441534" -> "441534", "Jersey"
-            | "441624" -> "441624", "Isle of Man"
+            | "441481" -> "44", "Guernsey"
+            | "441534" -> "44", "Jersey"
+            | "441624" -> "44", "Isle of Man"
             | _        -> "44", "United Kingdom"
         | '5' -> "45", "Denmark"
         | '6' -> "46", "Sweden"
@@ -289,16 +289,16 @@ let countryCode x =
             | '8' -> "598", "Uruguay"
             | '9' ->
                 match s.[4] with
-                | '0' -> "5990", unassigned
-                | '1' -> "5991", unassigned
-                | '2' -> "5992", unassigned
-                | '3' -> "5993", "Sint Eustatius"
-                | '4' -> "5994", "Saba"
-                | '5' -> "5995", unassigned
-                | '6' -> "5996", unassigned
-                | '7' -> "5997", "Bonaire"
-                | '8' -> "5998", unassigned
-                | '9' -> "5999", "Curaçao"
+                | '0' -> "599", unassigned
+                | '1' -> "599", unassigned
+                | '2' -> "599", unassigned
+                | '3' -> "599", "Sint Eustatius"
+                | '4' -> "599", "Saba"
+                | '5' -> "599", unassigned
+                | '6' -> "599", unassigned
+                | '7' -> "599", "Bonaire"
+                | '8' -> "599", unassigned
+                | '9' -> "599", "Curaçao"
     
     (* Zone 6: Southeast Asia and Oceania *)
     | '6' ->
@@ -306,8 +306,8 @@ let countryCode x =
         | '0' -> "60", "Malaysia"
         | '1' ->
             match s.Substring(0, 7) with
-            | "6189162" -> "6189162", "Cocos Islands"
-            | "6189164" -> "6189164", "Christmas Island"
+            | "6189162" -> "61", "Cocos Islands"
+            | "6189164" -> "61", "Christmas Island"
             | _         -> "61", "Australia"
         | '2' -> "62", "Indonesia"
         | '3' -> "63", "Philippines"
@@ -421,7 +421,7 @@ let countryCode x =
         match s.[1] with
         | '0' -> 
             if s.Substring(0,5) = "90392"
-            then "90392", "Northern Cyprus"
+            then "90", "Northern Cyprus"
             else "90", "Turkey"
         | '1' -> "91", "India"
         | '2' -> "92", "Pakistan"
@@ -462,8 +462,8 @@ let countryCode x =
             | '4' -> "994", "Azerbaijan"
             | '5' -> 
                 match s.Substring(0, 5) with
-                | "99534" -> "99534", "South Ossetia"
-                | "99544" -> "99544", "Abkhazia"
+                | "99534" -> "995", "South Ossetia"
+                | "99544" -> "995", "Abkhazia"
                 | _       -> "995", "Georgia"
             | '6' -> "996", "Kyrgyzstan"
             | '7' -> "997", unassigned
