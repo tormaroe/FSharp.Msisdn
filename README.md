@@ -1,4 +1,4 @@
-Msisdn is .NET library that facilitates working with international telephone numbers in F#. It follows the [ITU-T](http://en.wikipedia.org/wiki/ITU-T) recommendation [E.164](http://en.wikipedia.org/wiki/E.164).
+Msisdn is a .NET library that facilitates working with international telephone numbers in F#. It follows the [ITU-T](http://en.wikipedia.org/wiki/ITU-T) recommendation [E.164](http://en.wikipedia.org/wiki/E.164).
 
 Features:
 
