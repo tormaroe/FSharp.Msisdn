@@ -128,8 +128,7 @@ If you need to group your numbers by country code, you could do something like t
 
     numbers
     |> List.map Msisdn.create
-    |> List.filter Option.isSome
-    |> List.map Option.get
+    |> List.choose id
     |> Seq.groupBy 
         (fun x -> let cc, _ = Msisdn.countryCode x in cc)
     
