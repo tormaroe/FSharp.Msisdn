@@ -420,9 +420,9 @@ let countryCode x =
     | '9' -> 
         match s.[1] with
         | '0' -> 
-            if s.Substring(0,5) = "90392"
-            then "90", "Northern Cyprus"
-            else "90", "Turkey"
+            match s.Substring(0,5) with
+            | "90392" | "90533" | "90542" -> "90", "Northern Cyprus"
+            | _ -> "90", "Turkey"
         | '1' -> "91", "India"
         | '2' -> "92", "Pakistan"
         | '3' -> "93", "Afghanistan"
