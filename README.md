@@ -117,7 +117,7 @@ This is how you may use FSharp.Msisdn to get the canonical representation from a
     // Result:
     // ["4791929394"; "155532654"; "362347657"]
 
-Of course the same thing can be done even more easily using `canonicalize` and `isValid` directly:
+Of course the same thing can be done using `canonicalize` and `isValid` directly:
 
     numbers
     |> List.map Msisdn.canonicalize
