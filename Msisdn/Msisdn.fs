@@ -10,7 +10,7 @@ type T = Msisdn of string
 let apply f (Msisdn s) = f s
 
 /// Get the canonical string representation of an Msisdn
-let value x = apply id x
+let value = apply id
 
 /// Equality
 let equals left right =
