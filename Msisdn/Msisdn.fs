@@ -20,13 +20,10 @@ let equals left right =
 let compareTo left right = 
     (value left).CompareTo (value right)
 
-// Note: No minimum length defined
-
-let private validationRegex = Regex ("", RegexOptions.Compiled)
+let private validationRegex = Regex ("^[0-9]{8,15}$", RegexOptions.Compiled)
 
 /// Checks if s is a valid input for an Msisdn
-let isValid s =
-    System.Text.RegularExpressions.Regex.IsMatch (s, "^[0-9]{8,15}$")
+let isValid = validationRegex.IsMatch
 
 let private remove (s:string) x =
     s.Replace (string x, "")
