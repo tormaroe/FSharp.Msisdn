@@ -121,8 +121,8 @@ This is how you may use FSharp.Msisdn to get the canonical representation from a
                    "+87899877889x"]
     
     numbers
-    |> List.map Msisdn.create
-    |> List.choose (Option.map Msisdn.value)
+    |> List.choose Msisdn.create
+    |> List.map Msisdn.value
 
     // Result:
     // ["4791929394"; "155532654"; "362347657"]
@@ -136,8 +136,7 @@ Of course the same thing can be done using `canonicalize` and `isValid` directly
 If you need to group your numbers by country code, you could do something like this:
 
     numbers
-    |> List.map Msisdn.create
-    |> List.choose id
+    |> List.choose Msisdn.create
     |> Seq.groupBy 
         (fun x -> let cc, _ = Msisdn.countryCode x in cc)
     
