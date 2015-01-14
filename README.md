@@ -105,7 +105,8 @@ CC will always be between 1 and 3 digits. The same CC will in some situations ha
 
     ["90 312 213 2965"
      "90 392 11111"]
-    |> List.map (Option.map Msisdn.countryCode)
+    |> List.choose Msisdn.create
+    |> List.map Msisdn.countryCode
 
     // Result:
     // [("90", "Turkey")
