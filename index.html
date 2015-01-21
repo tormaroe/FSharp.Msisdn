@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Fsharp.msisdn by tormaroe</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Fsharp.msisdn</h1>
+        <h2>Library for working with international telephone numbers in F#</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/tormaroe/FSharp.Msisdn/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/tormaroe/FSharp.Msisdn/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/tormaroe/FSharp.Msisdn" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p>Msisdn is a .NET library that facilitates working with international telephone numbers in F#. It follows the <a href="http://en.wikipedia.org/wiki/ITU-T">ITU-T</a> recommendation <a href="http://en.wikipedia.org/wiki/E.164">E.164</a>.</p>
+
+<p>Features:</p>
+
+<ul>
+<li>Provides a type for representing phone numbers. A value of this type will ALWAYS be a valid phone number (it may not exist, but it will be valid).</li>
+<li>Validates MSISDN strings</li>
+<li>Normalizes MSISDN strings to its canonical representation</li>
+<li>Lets you extract country calling code and country name from Msisdn</li>
+</ul>
+
+<h2>
+<a id="install-with-nuget" class="anchor" href="#install-with-nuget" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install with NuGet</h2>
+
+<pre><code>PM&gt; Install-Package FSharp.Msisdn
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>You create an Msisdn by providing a string describing the phone number, including country calling code prefix, to the <code>create</code> function.</p>
+
+<pre><code>// Create a fictitious Norwegian mobile number
+match Msisdn.create "4799999999" with
+| Some msisdn -&gt; doSomethingWith msisdn
+| None -&gt; printfn "Not a valid MSISDN"
+</code></pre>
+
+<p>Note that you don't have to (actually you're not allowed to) open the Msisdn module. The module will automatically be available everywhere in a project referencing FSharp.Msisdn, but you have to use qualified access.</p>
+
+<h2>
+<a id="msisdn-module-api" class="anchor" href="#msisdn-module-api" aria-hidden="true"><span class="octicon octicon-link"></span></a>Msisdn module API</h2>
+
+<h3>
+<a id="t" class="anchor" href="#t" aria-hidden="true"><span class="octicon octicon-link"></span></a>T</h3>
+
+<pre><code>type T = Msisdn of string
+</code></pre>
+
+<p>A single case discriminated union wrapping a phone number string. YOU DON'T NEED TO REFER TO THIS TYPE DIRECTLY, AND SHOULD NOT DO SO.</p>
+
+<h3>
+<a id="create" class="anchor" href="#create" aria-hidden="true"><span class="octicon octicon-link"></span></a>create</h3>
+
+<pre><code>val create : string -&gt; T option
+</code></pre>
+
+<p>Creates an Msisdn option. If s is a valid number, returns <code>Some Msisdn.T</code>. If not valid, returns <code>None</code>. <code>null</code> is never a valid number.</p>
+
+<p>By using an option type, <code>create</code> forces the caller to handle the case of invalid input, which is a good thing!</p>
+
+<p><code>create</code> will strip away and ignore certain characters normally found in human representations of phone numbers. These are all valid inputs:</p>
+
+<pre><code>"47 99 99 99 99"   // spaces are ok
+"0047 99999999"    // leading zeros are ok
+"+47 999-99-999"   // plus and hyphens are ok
+"[47](999){99999}" // brackets are ok
+"47\t99999999\r\n" // even tabs and newlines are ok
+</code></pre>
+
+<h3>
+<a id="apply" class="anchor" href="#apply" aria-hidden="true"><span class="octicon octicon-link"></span></a>apply</h3>
+
+<pre><code>val apply : (string -&gt; 'a) -&gt; T -&gt; 'a
+</code></pre>
+
+<p>Apply function f to the canonical string representation of an Msisdn.</p>
+
+<h3>
+<a id="value" class="anchor" href="#value" aria-hidden="true"><span class="octicon octicon-link"></span></a>value</h3>
+
+<pre><code>val value : T -&gt; string
+</code></pre>
+
+<p>Get the canonical string representation of an Msisdn.</p>
+
+<p>When you retrieve the value from an Msisdn, the canonical string representation is given:</p>
+
+<pre><code>Msisdn.create "0047 (999) 99-999"
+|&gt; Option.get
+|&gt; Msisdn.value // evaluates to "4799999999"
+</code></pre>
+
+<h3>
+<a id="isvalid" class="anchor" href="#isvalid" aria-hidden="true"><span class="octicon octicon-link"></span></a>isValid</h3>
+
+<pre><code>val isValid : string -&gt; bool
+</code></pre>
+
+<p>Checks if string is a valid input for an Msisdn.
+Verification is done for you when you create
+a new Msisdn using the <code>create</code> function.</p>
+
+<h3>
+<a id="canonicalize" class="anchor" href="#canonicalize" aria-hidden="true"><span class="octicon octicon-link"></span></a>canonicalize</h3>
+
+<pre><code>val canonicalize : string -&gt; string
+</code></pre>
+
+<p>Transforms a valid Msisdn string to its canonical form.
+This is done for you when you create a new Msisdn using
+the <code>create</code> function.</p>
+
+<h3>
+<a id="equals" class="anchor" href="#equals" aria-hidden="true"><span class="octicon octicon-link"></span></a>equals</h3>
+
+<pre><code>val equals : T -&gt; T -&gt; bool
+</code></pre>
+
+<h3>
+<a id="compareto" class="anchor" href="#compareto" aria-hidden="true"><span class="octicon octicon-link"></span></a>compareTo</h3>
+
+<pre><code>val compareTo : T -&gt; T -&gt; int
+</code></pre>
+
+<h3>
+<a id="countrycode" class="anchor" href="#countrycode" aria-hidden="true"><span class="octicon octicon-link"></span></a>countryCode</h3>
+
+<pre><code>val countryCode : T -&gt; string * string
+</code></pre>
+
+<p>Get the country calling code prefix (CC) and the country or destination name
+from an Msisdn.</p>
+
+<pre><code>let cc, description = Msisdn.create "+4799999999"
+                      |&gt; Option.get
+                      |&gt; Msisdn.countryCode
+// val cc = "47"
+// val description = "Norway"
+</code></pre>
+
+<p>CC will always be between 1 and 3 digits. The same CC will in some situations have different descriptions.</p>
+
+<pre><code>["90 312 213 2965"
+ "90 392 11111"]
+|&gt; List.choose Msisdn.create
+|&gt; List.map Msisdn.countryCode
+
+// Result:
+// [("90", "Turkey")
+    ("90", "Northern Cyprus")]
+</code></pre>
+
+<h2>
+<a id="more-examples" class="anchor" href="#more-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>More examples</h2>
+
+<p>This is how you may use FSharp.Msisdn to get the canonical representation from a list potensially containing some invalid numbers:</p>
+
+<pre><code>let numbers = ["47 91 92 93 94"
+               "1-555-32-654"
+               "00362347657"
+               "+87899877889x"]
+
+numbers
+|&gt; List.choose Msisdn.create
+|&gt; List.map Msisdn.value
+
+// Result:
+// ["4791929394"; "155532654"; "362347657"]
+</code></pre>
+
+<p>Of course the same thing can be done using <code>canonicalize</code> and <code>isValid</code> directly:</p>
+
+<pre><code>numbers
+|&gt; List.map Msisdn.canonicalize
+|&gt; List.filter Msisdn.isValid
+</code></pre>
+
+<p>If you need to group your numbers by country code, you could do something like this:</p>
+
+<pre><code>numbers
+|&gt; List.choose Msisdn.create
+|&gt; Seq.groupBy 
+    (fun x -&gt; let cc, _ = Msisdn.countryCode x in cc)
+
+// Result:
+// [("47", seq [Msisdn "4791929394"])
+//  ("1", seq [Msisdn "155532654"])
+//  ("36", seq [Msisdn "362347657"])]
+</code></pre>
+
+<h2>
+<a id="the-mit-license-mit" class="anchor" href="#the-mit-license-mit" aria-hidden="true"><span class="octicon octicon-link"></span></a>The MIT License (MIT)</h2>
+
+<p>Copyright (c) 2015 Torbjørn Marø</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
