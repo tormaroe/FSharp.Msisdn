@@ -7,7 +7,7 @@
     <authors>Torbjørn Marø</authors>
     <owners>Torbjørn Marø</owners>
     <licenseUrl>https://github.com/tormaroe/FSharp.Msisdn/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/tormaroe/FSharp.Msisdn/</projectUrl>
+    <projectUrl>http://tormaroe.github.io/FSharp.Msisdn</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Msisdn is a library that facilitates working with international telephone numbers in F#.</description>
     <releaseNotes>
