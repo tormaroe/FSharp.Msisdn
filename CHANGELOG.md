@@ -4,6 +4,7 @@
 
 * Allow period (`.`) in Msisdn input.
 * Add more specific Country Code descriptions in Zone 1 (North America).
+* Add length validation (pr country) ?
 
 ## 0.3.0
 
